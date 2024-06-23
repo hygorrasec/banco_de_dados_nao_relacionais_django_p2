@@ -1,0 +1,20 @@
+{% extends 'autenticacao/base.html' %}
+
+{% block title %}Listar Eventos{% endblock %}
+
+{% block content %}
+<h2>Eventos</h2>
+<a href="{% url 'criar_evento' %}" class="btn btn-primary mb-3">Criar Evento</a>
+<ul class="list-group">
+    {% for evento in eventos %}
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+            {{ evento.nome }} - {{ evento.data }}
+            <span>
+                <a href="{% url 'editar_evento' evento.pk %}" class="btn btn-sm btn-warning">Editar</a>
+                <a href="{% url 'deletar_evento' evento.pk %}" class="btn btn-sm btn-danger">Deletar</a>
+            </span>
+        </li>
+    {% endfor %}
+</ul>
+<a href="{% url 'home' %}" class="btn btn-secondary mt-3">Voltar à Página Inicial</a>
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends 'autenticacao/base.html' %}
+
+{% block title %}Página Inicial{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+    <h2>Boas vindas, {{ user.username }}!</h2>
+{% else %}
+    <h2>Olá, visitante! Faça <a href="{% url 'login' %}">login</a> para acessar o conteúdo ou <a href="{% url 'registrar' %}">registrar</a> para criar uma conta.</h2>
+{% endif %}
+{% endblock %}
