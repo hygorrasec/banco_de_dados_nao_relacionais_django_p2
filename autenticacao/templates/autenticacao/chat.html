@@ -6,7 +6,7 @@
 <h2>Chat</h2>
 <input id="chat-message-input" type="text" size="100">
 <input id="chat-message-submit" type="button" value="Enviar">
-<div id="chat-log"></div>
+<div id="chat-log" class="chat-log"></div>
 <script>
     const chatSocket = new WebSocket(
         'ws://' + window.location.host + '/ws/chat/'
@@ -18,7 +18,10 @@
 
     chatSocket.onmessage = function(e) {
         const data = JSON.parse(e.data);
-        document.querySelector('#chat-log').innerHTML += (data.message + '<br>');
+        const messageElement = document.createElement('div');
+        messageElement.className = 'chat-message';
+        messageElement.innerHTML = `<strong>${data.username}:</strong> ${data.message}`;
+        document.querySelector('#chat-log').appendChild(messageElement);
         console.log('Message received:', data.message);
     };
 
@@ -40,8 +43,10 @@
     document.querySelector('#chat-message-submit').onclick = function(e) {
         const messageInputDom = document.querySelector('#chat-message-input');
         const message = messageInputDom.value;
+        const username = "{{ request.user.username }}"; // Passando o nome de usuário do Django template
         chatSocket.send(JSON.stringify({
-            'message': message
+            'message': message,
+            'username': username
         }));
         messageInputDom.value = '';
         console.log('Message sent:', message);

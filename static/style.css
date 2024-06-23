@@ -62,3 +62,36 @@ li {
         align-self: flex-end;
     }
 }
+
+.chat-log {
+    border: 1px solid #ccc;
+    padding: 10px;
+    max-height: 300px;
+    overflow-y: scroll;
+    background-color: #f9f9f9;
+}
+
+.chat-message:nth-child(odd) {
+    background-color: #e0e0e0;
+    padding: 5px;
+    border-radius: 5px;
+    margin: 5px 0;
+}
+
+.chat-message:nth-child(even) {
+    background-color: #d3d3d3;
+    padding: 5px;
+    border-radius: 5px;
+    margin: 5px 0;
+}
+
+#chat-message-input {
+    width: 70%;
+    padding: 10px;
+    margin: 10px 0;
+}
+
+#chat-message-submit {
+    padding: 10px 20px;
+    margin: 10px 0;
+}
